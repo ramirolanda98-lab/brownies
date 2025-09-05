@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="stylesheet" href="paginita de ramirito.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BROWNIESGARDEN</title>
+
+<!-- Fuente -->
+<link href="https://fonts.googleapis.com/css2?family=Sirukota&display=swap" rel="stylesheet">
+<!-- Iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+  <h1>BROWNIESGARDEN</h1>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#productos">Productos</a>
+    <a href="#beneficios">Beneficios</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#informacion">Contacto</a>
+  </nav>
+</header>
+
+
+<!-- Icono carrito -->
+<div id="cart-icon"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></div>
+
+<!-- Drawer Carrito -->
+<div id="cart">
+  <button id="close-cart"><i class="fas fa-times"></i></button>
+  <h2>🛒 Tu carrito</h2>
+  <div id="cart-items"></div>
+  <div id="cart-total">Total: $0 ARS</div>
+
+  <!-- Mensaje de horario -->
+  <div id="horario-pedidos" style="padding:10px;margin:10px 0;border-radius:12px;background:#fff4e7;color:#6a2d35;font-weight:bold;text-align:center;">
+    🕑 Pedidos disponibles de <br> 13:30 a 21:30
+  </div>
+
+  <div id="client-name" style="margin:8px 0 14px;">
+    <label for="name"><b>Tu nombre</b></label>
+    <input type="text" id="name" placeholder="Escribí tu nombre" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;">
+  </div>
+
+  <div id="payment-method">
+    <label for="payment"><b>Método de pago</b></label>
+    <select id="payment">
+      <option value="Efectivo">Efectivo</option>
+      <option value="Transferencia">Transferencia</option>
+      <option value="MercadoPago">MercadoPago</option>
+    </select>
+  </div>
+
+  <div id="shipping-method" style="margin:8px 0 14px;">
+    <label for="shipping"><b>Método de envío/retiro</b></label>
+    <select id="shipping">
+      <option value="Retiro en el local">Retiro en el local</option>
+      <option value="Envío a domicilio">Envío a domicilio</option>
+    </select>
+  </div>
+
+  <!-- ★ NUEVO: campo Dirección que aparece solo si eligen "Envío a domicilio" -->
+  <div id="address-field" style="display:none;margin:8px 0 14px;">
+    <label for="address"><b>Dirección de entrega</b></label>
+    <input type="text" id="address" placeholder="Calle, número, piso/depto, barrio" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;">
+  </div>
+  <!-- ★ FIN NUEVO -->
+
+  <!-- ❖ AGREGADO: aviso de dirección de retiro (animado) -->
+  <div id="pickup-hint">📍 Retiro en: <b>Av. Brown 123, Puerto Madryn</b></div>
+  <!-- ❖ FIN AGREGADO -->
+
+  <div id="sendto-method" style="margin:8px 0 16px;">
+    <label for="sendto"><b>Enviar pedido a</b></label>
+    <select id="sendto">
+      <option value="542804864819">WhatsApp 2804864819</option>
+      <option value="542805069519">WhatsApp 2805069519</option>
+    </select>
+  </div>
+
+  <button id="checkout" class="btn btn-primary" style="width:100%;">Finalizar pedido</button>
+</div>
+
+
+
+
+
+<!-- Modal Cantidad -->
+<div id="modal">
+  <div class="modal-card">
+    <span class="modal-close" id="modalClose">&times;</span>
+    <div class="modal-title" id="mNombre">Producto</div>
+    <div class="modal-desc" id="mDesc">Descripción</div>
+    <div class="modal-price">Precio: $<span id="mPrecio">0</span> ARS</div>
+
+    <div class="qty-row">
+      <button class="qty-btn" id="menos">-</button>
+      <input type="number" id="cantidad" class="qty-input" min="1" value="1"/>
+      <button class="qty-btn" id="mas">+</button>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-outline" id="cancelar">Cancelar</button>
+      <button class="btn btn-primary" id="agregarCarrito">Agregar al carrito</button>
+    </div>
+  </div>
+</div>
+
+<!-- Hero -->
+<section id="inicio">
+  <div>
+    <h2>¡Bienvenidos a BROWNIESGARDEN!</h2>
+    <p>Los brownies más deliciosos, recién horneados y con amor.</p>
+    <button id="btnVerProductos">Ver Productos</button>
+  </div>
+</section>
+
+<!-- Productos -->
+<section id="productos">
+  <h2>Nuestros Brownies</h2>
+  <div class="productos-container">
+
+    <!-- Classic One -->
+    <article class="card" data-nombre="Classic One" data-precio="4000" data-descripcion="Brownie de chocolate relleno de salsa de avellanas y oreos." data-img="img/classic-one.jpg">
+      <div class="img-wrap">
+        <img src="https://i.imgur.com/NNmYOCC.jpeg" alt="Classic One">
+        <span class="badge">$4000</span>
+      </div>
+      <div class="card-body">
+        <h3>Classic One</h3>
+        <p>Brownie de chocolate relleno de salsa de avellanas y oreos con por encima.</p>
+        <div class="price">$4000 ARS</div>
+        <div class="actions">
+          <button class="btn btn-outline ver" type="button">Ver</button>
+          <button class="btn btn-primary add" type="button">Agregar</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Red Forest -->
+    <article class="card" data-nombre="Red Forest" data-precio="5000" data-descripcion="Red velvet con chips de chocolate blanco y frosting de queso crema." data-img="img/red-forest.jpg">
+      <div class="img-wrap">
+        <img src="https://i.imgur.com/8G2TyyG.jpeg" alt="Red Forest">
+        <span class="badge">$5000</span>
+      </div>
+      <div class="card-body">
+        <h3>Red Forest</h3>
+        <p>Brownie de red velvet con chips de chocolate blanco y frosting de queso crema.</p>
+        <div class="price">$5000 ARS</div>
+        <div class="actions">
+          <button class="btn btn-outline ver" type="button">Ver</button>
+          <button class="btn btn-primary add" type="button">Agregar</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Tira-Miss U -->
+    <article class="card" data-nombre="Tira-Miss U" data-precio="3000" data-descripcion="Chocolate con queso crema y galletitas vainillas como topping." data-img="img/tira-miss-u.jpg">
+      <div class="img-wrap">
+        <img src="https://i.imgur.com/s3B56O9.jpeg" alt="Tira-Miss U">
+        <span class="badge">$3000</span>
+      </div>
+      <div class="card-body">
+        <h3>Tira-Miss U</h3>
+        <p>Brownie de chocolate con queso crema y galletitas vainillas como topping.</p>
+        <div class="price">$3000 ARS</div>
+        <div class="actions">
+          <button class="btn btn-outline ver" type="button">Ver</button>
+          <button class="btn btn-primary add" type="button">Agregar</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Carrot Type -->
+    <article class="card" data-nombre="Carrot Type" data-precio="3800" data-descripcion="Carrot cake con chocolate blanco y frosting de queso crema." data-img="img/carrot-type.jpg">
+      <div class="img-wrap">
+        <img src="https://i.imgur.com/NNmYOCC.jpeg" alt="Carrot Type">
+        <span class="badge">$3800</span>
+      </div>
+      <div class="card-body">
+        <h3>Carrot Type</h3>
+        <p>Brownie de torta carrot cake con chocolate blanco y frosting de queso crema.</p>
+        <div class="price">$3800 ARS</div>
+        <div class="actions">
+          <button class="btn btn-outline ver" type="button">Ver</button>
+          <button class="btn btn-primary add" type="button">Agregar</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Brookie -->
+    <article class="card" data-nombre="Brookie" data-precio="4200" data-descripcion="Mezcla de brownie + masa de cookies con chips de chocolate negro." data-img="img/brookie.jpg">
+      <div class="img-wrap">
+        <img src="https://i.imgur.com/x0kooqt.jpeg" alt="Brookie">
+        <span class="badge">$4200</span>
+      </div>
+      <div class="card-body">
+        <h3>Brookie</h3>
+        <p>Mezcla de brownie + masa de cookies con chips de chocolate negro.</p>
+        <div class="price">$4200 ARS</div>
+        <div class="actions">
+          <button class="btn btn-outline ver" type="button">Ver</button>
+          <button class="btn btn-primary add" type="button">Agregar</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Cookie Monster -->
+    <article class="card" data-nombre="Cookie Monster" data-precio="4600" data-descripcion="Blue velvet con oreos + frosting y cookies chocolate chips." data-img="img/cookie-monster.jpg">
+      <div class="img-wrap">
+        <img src="https://i.imgur.com/VdCIvLr.jpeg" alt="Cookie Monster">
+        <span class="badge">$4600</span>
+      </div>
+      <div class="card-body">
+        <h3>Cookie Monster</h3>
+        <p>Brownies de Blue velvet con oreos + frosting y cookies chocolate chips.</p>
+        <div class="price">$4600 ARS</div>
+        <div class="actions">
+          <button class="btn btn-outline ver" type="button">Ver</button>
+          <button class="btn btn-primary add" type="button">Agregar</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Dubai’s -->
+    <article class="card" data-nombre="Dubai’s" data-precio="4800" data-descripcion="Centro de salsa de pistachos y chips de chocolate blanco." data-img="img/dubais.jpg">
+      <div class="img-wrap">
+        <img src="https://i.imgur.com/GpK3t2V.jpeg" alt="Dubai’s">
+        <span class="badge">$4800</span>
+      </div>
+      <div class="card-body">
+        <h3>Dubai’s</h3>
+        <p>Brownie con centro de salsa de pistachos y chips de chocolate blanco.</p>
+        <div class="price">$4800 ARS</div>
+        <div class="actions">
+          <button class="btn btn-outline ver" type="button">Ver</button>
+          <button class="btn btn-primary add" type="button">Agregar</button>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- Beneficios -->
+<section id="beneficios">
+  <div class="wrap">
+    <h2>Beneficios</h2>
+    <div class="beneficios-container">
+      <div class="beneficio-card"><h3>Ingredientes Frescos</h3><p>Solo los mejores ingredientes para un sabor único.</p></div>
+      <div class="beneficio-card"><h3>Recetas Artesanales</h3><p>Cada brownie está horneado con dedicación y amor.</p></div>
+      <div class="beneficio-card"><h3>Entrega Rápida</h3><p>Recibí tus brownies frescos directamente en tu casa.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonios -->
+<section id="testimonios">
+  <div class="wrap">
+    <h2>Testimonios</h2>
+    <div class="testimonios-container">
+      <div class="testimonio-card">"Los brownies son espectaculares, nunca había probado algo tan rico en Puerto Madryn." - Florencia</div>
+      <div class="testimonio-card">"Excelente sabor y presentación. Mi familia quedó encantada." - Martín</div>
+      <div class="testimonio-card">"Siempre frescos y deliciosos. No puedo dejar de pedirlos cada semana." - Lucía</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contacto -->
+<section id="informacion">
+  <div class="wrap" style="text-align:center;">
+    <h2>Contacto</h2>
+    <p><b>Tel:</b> 2804864819 - 2805069519</p>
+    <p><b>Email:</b> zzoeyoguel@gmail.com - Ramirolanda98@gmail.com</p>
+    <div class="redes" style="margin-top:12px;">
+      <a href="https://www.instagram.com/browniesgarden.pm?igsh=MWd1MGRtMDhybDNhOA==" target="_blank">
+        <i class="fab fa-instagram-square"></i> BROWNIESGARDEN
+      </a>
+    </div>
+    <p style="margin-top:18px;font-size:1.15em;color:var(--rosa);">
+      📸 Las fotos de nuestros brownies podés verlas en nuestro Instagram.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 BROWNIESGARDEN - Todos los derechos reservados 🍫</p>
+</footer>
+
+<script>
+/* Animación secciones */
+const secciones=document.querySelectorAll("section");
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("visible"); });
+},{threshold:.2});
+secciones.forEach(s=>obs.observe(s));
+
+/* Scroll a productos */
+document.getElementById("btnVerProductos").addEventListener("click",()=>{
+  document.getElementById("productos").scrollIntoView({behavior:"smooth"});
+});
+
+/* -------- Carrito -------- */
+let cart=[];
+const cartItems=document.getElementById("cart-items");
+const cartTotal=document.getElementById("cart-total");
+const cartCount=document.getElementById("cart-count");
+
+/* ❖ AGREGADO: dirección de retiro + variable envío extra */
+const PICKUP_ADDRESS = "Av. Brown 123, Puerto Madryn";
+let envioExtra = 0;
+/* ❖ FIN AGREGADO */
+
+function renderCart(){
+  cartItems.innerHTML="";
+  let total=0, count=0;
+  cart.forEach((item,i)=>{
+    const itemTotal=item.price*item.qty;
+    total += itemTotal; count += item.qty;
+    cartItems.insertAdjacentHTML("beforeend",`
+      <div class="cart-item">
+        <img src="${item.img}" alt="${item.name}">
+        <div class="cart-info">
+          <strong>${item.name}</strong>
+          <small>$${item.price} x ${item.qty} = <b>$${itemTotal}</b></small>
+        </div>
+        <div class="cart-actions">
+          <button onclick="changeQty(${i},-1)" title="Quitar">➖</button>
+          <button onclick="changeQty(${i},1)" title="Sumar">➕</button>
+          <button onclick="removeItem(${i})" title="Eliminar">🗑</button>
+        </div>
+      </div>
+    `);
+  });
+  cartTotal.textContent="Total: $"+total+" ARS";
+  cartCount.textContent=count;
+
+  /* ❖ AGREGADO: sumar $800 si es envío a domicilio y mostrarlo */
+  try{
+    const extra = (envioExtra||0);
+    if(extra>0){
+      const totalFinal = total + extra;
+      cartTotal.textContent = "Total: $" + totalFinal + " ARS (incluye envío $" + extra + ")";
+    }
+  }catch(_){}
+  /* ❖ FIN AGREGADO */
+}
+function changeQty(i,d){
+  cart[i].qty += d;
+  if(cart[i].qty<=0){ cart.splice(i,1); }
+  renderCart();
+}
+function removeItem(i){ cart.splice(i,1); renderCart(); }
+
+/* Abrir/cerrar carrito */
+document.getElementById("cart-icon").onclick=()=>document.getElementById("cart").classList.add("active");
+document.getElementById("close-cart").onclick=()=>document.getElementById("cart").classList.remove("active");
+
+/* -------- Modal Cantidad -------- */
+const modal=document.getElementById("modal");
+const mNombre=document.getElementById("mNombre");
+const mDesc=document.getElementById("mDesc");
+const mPrecio=document.getElementById("mPrecio");
+const cantidad=document.getElementById("cantidad");
+const btnMenos=document.getElementById("menos");
+const btnMas=document.getElementById("mas");
+const btnAgregar=document.getElementById("agregarCarrito");
+const btnCancelar=document.getElementById("cancelar");
+const btnCerrar=document.getElementById("modalClose");
+
+let prodSel=null;
+function abrirModal(data){
+  prodSel = data;
+  mNombre.textContent=data.nombre;
+  mDesc.textContent=data.descripcion;
+  mPrecio.textContent=data.precio;
+  cantidad.value=1;
+  modal.style.display="flex";
+}
+function cerrarModal(){ modal.style.display="none"; }
+
+btnMenos.onclick=()=>{ if(+cantidad.value>1) cantidad.value=+cantidad.value-1; }
+btnMas.onclick=()=>{ cantidad.value=+cantidad.value+1; }
+btnCancelar.onclick=btnCerrar.onclick=()=>cerrarModal();
+window.addEventListener("click",e=>{ if(e.target===modal) cerrarModal(); });
+
+btnAgregar.onclick=()=>{
+  const qty=parseInt(cantidad.value)||1;
+  const existing=cart.find(p=>p.name===prodSel.nombre);
+  if(existing){ existing.qty += qty; }
+  else{ cart.push({name:prodSel.nombre,price:+prodSel.precio,qty,img:prodSel.img}); }
+  renderCart();
+  cerrarModal();
+  document.getElementById("cart").classList.add("active");
+};
+
+/* Bind de tarjetas */
+document.querySelectorAll(".card").forEach(card=>{
+  const data={
+    nombre:card.dataset.nombre,
+    precio:card.dataset.precio,
+    descripcion:card.dataset.descripcion,
+    img:card.dataset.img
+  };
+  card.querySelector(".add").addEventListener("click",()=>abrirModal(data));
+  card.querySelector(".ver").addEventListener("click",()=>abrirModal(data));
+});
+
+/* ★ NUEVO: mostrar/ocultar campo Dirección según método de envío */
+const shippingSelect = document.getElementById("shipping");
+const addressField = document.getElementById("address-field");
+/* ❖ AGREGADO: referencia al hint de retiro */
+const pickupHint = document.getElementById("pickup-hint");
+/* ❖ FIN AGREGADO */
+function toggleAddressField(){
+  if(shippingSelect.value === "Envío a domicilio"){
+    addressField.style.display = "block";
+    /* ❖ AGREGADO */
+    if(pickupHint) pickupHint.style.display = "none";
+    envioExtra = 800;
+    /* ❖ FIN AGREGADO */
+  } else {
+    addressField.style.display = "none";
+    /* ❖ AGREGADO */
+    if(pickupHint){
+      pickupHint.style.display = "block";
+      pickupHint.style.animation = "pop .35s ease";
+    }
+    envioExtra = 0;
+    /* ❖ FIN AGREGADO */
+  }
+  /* ❖ AGREGADO: recalcular total al cambiar método */
+  try{ renderCart(); }catch(_){}
+  /* ❖ FIN AGREGADO */
+}
+shippingSelect.addEventListener("change", toggleAddressField);
+toggleAddressField();
+/* ★ FIN NUEVO */
+
+/* ★ NUEVO: control de horario (13:30 a 21:30) -> oculta botón fuera de horario */
+function estaDentroDeHorario(){
+  const ahora=new Date();
+  const mins=ahora.getHours()*60 + ahora.getMinutes();
+  const inicio=13*60 + 30; // 13:30
+  const fin=21*60 + 30;    // 21:30
+  return mins>=inicio && mins<=fin;
+}
+function aplicarEstadoHorario(){
+  const abierto=estaDentroDeHorario();
+  const btn=document.getElementById("checkout");
+  const aviso=document.getElementById("horario-pedidos");
+  if(btn){
+    btn.style.display = abierto ? "block" : "none"; // desaparece fuera de horario
+  }
+  if(aviso){
+    if(abierto){
+      aviso.style.background="#e7f8e7";
+      aviso.style.color="#2d6a2d";
+      aviso.innerHTML="🟢 Pedidos abiertos<br>Horario: 13:30 a 21:30";
+    }else{
+      aviso.style.background="#fbe4e4";
+      aviso.style.color="#a22";
+      aviso.innerHTML="🛑 Pedidos cerrados<br>Horario: 13:30 a 21:30";
+    }
+  }
+}
+aplicarEstadoHorario();
+setInterval(aplicarEstadoHorario, 60000);
+/* ★ FIN NUEVO */
+
+/* Checkout -> WhatsApp */
+document.getElementById("checkout").onclick=()=>{
+  /* ★ Seguridad adicional: si está fuera de horario, no deja avanzar */
+  if(!estaDentroDeHorario()){
+    alert("🚫 Estamos fuera de horario de pedidos (13:30 a 21:30). ¡Te esperamos luego! 💕");
+    aplicarEstadoHorario();
+    return;
+  }
+
+  if(cart.length===0){ alert("Tu carrito está vacío 😅"); return; }
+
+  const name=document.getElementById("name").value.trim();
+  if(!name){ alert("Por fa, poné tu nombre ✍️"); return; }
+
+  const code="ORD-"+String(Math.floor(Math.random()*100000)).padStart(5,"0");
+  const method=document.getElementById("payment").value;
+  const shipping=document.getElementById("shipping").value;
+  const sendTo=document.getElementById("sendto").value;
+
+  /* ★ NUEVO: tomar dirección si es envío a domicilio */
+  let addressText="";
+  if(shipping==="Envío a domicilio"){
+    const addr=(document.getElementById("address").value||"").trim();
+    if(!addr){
+      alert("📦 Ingresá la dirección para el envío a domicilio, por favor.");
+      return;
+    }
+    addressText = addr;
+  }
+  /* ★ FIN NUEVO */
+
+  let total=0;
+  let msg="🍫 *Pedido BROWNIESGARDEN*\\n\\n";
+  msg += `👤 *Cliente:* ${name}\\n`;
+  msg += `🆔 *Pedido:* ${code}\\n\\n`;
+
+  cart.forEach(it=>{
+    const line=it.price*it.qty; total+=line;
+    msg += `👉 ${it.name} x${it.qty} = $${line}\\n`;
+  });
+
+  msg += `\\n💰 *Total:* $${total} ARS`;
+  msg += `\\n💳 *Pago:* ${method}`;
+  msg += `\\n🚚 *Envío/Retiro:* ${shipping}`;
+
+  /* ★ NUEVO: agregar dirección al mensaje si corresponde */
+  if(addressText){
+    msg += `\\n🏠 *Dirección:* ${addressText}`;
+  }
+  /* ★ FIN NUEVO */
+
+  /* ❖ AGREGADO: costo de envío + dirección de retiro + total final */
+  if(shipping==="Envío a domicilio"){
+    msg += `\\n📦 *Envío:* +$800`;
+  }else{
+    msg += `\\n📍 *Retiro en:* ${PICKUP_ADDRESS}`;
+  }
+  const totalFinal = total + (shipping==="Envío a domicilio" ? 800 : 0);
+  if(totalFinal !== total){
+    msg += `\\n🧾 *Total final:* $${totalFinal} ARS`;
+  }
+  /* ❖ FIN AGREGADO */
+
+  msg += `\\n\\n🙌 ¡Gracias por tu compra, ${name}! Nos vemos pronto 💕`;
+
+  /* ★★ AÑADIDO (SIN BORRAR NADA): Re-formateo VERTICAL del mensaje con separadores */
+  (()=>{
+    let totalV = 0;
+    let msgV = "🍫 *Pedido BROWNIESGARDEN*\n\n";
+    msgV += `👤 *Cliente:* ${name}\n`;
+    msgV += `🆔 *Pedido:* ${code}\n\n`;
+
+    cart.forEach(it=>{
+      const line = it.price * it.qty; totalV += line;
+      msgV += `👉 ${it.name}\n   Cantidad: ${it.qty}\n   Subtotal: $${line}\n`;
+      msgV += `───────────────\n`;
+    });
+
+    msgV += `\n💰 *Total productos:* $${totalV} ARS\n`;
+    msgV += `💳 *Pago:* ${method}\n`;
+    msgV += `🚚 *Envío/Retiro:* ${shipping}\n`;
+
+    if(addressText){
+      msgV += `🏠 *Dirección:* ${addressText}\n`;
+    }
+
+    if(shipping==="Envío a domicilio"){
+      msgV += `📦 *Envío:* +$800\n`;
+    }else{
+      msgV += `📍 *Retiro en:* ${PICKUP_ADDRESS}\n`;
+    }
+
+    const totalFinalV = totalV + (shipping==="Envío a domicilio" ? 800 : 0);
+    if(totalFinalV !== totalV){
+      msgV += `🧾 *Total final:* $${totalFinalV} ARS\n`;
+    }
+
+    msgV += `\n🙌 ¡Gracias por tu compra, ${name}! Nos vemos pronto 💕`;
+
+    /* Sobrescribimos el mensaje final a enviar, pero SIN borrar las líneas anteriores */
+    msg = msgV;
+  })();
+  /* ★★ FIN AÑADIDO */
+
+  const url=`https://wa.me/${sendTo}?text=${encodeURIComponent(msg)}`;
+  window.open(url,"_blank");
+};
+
+
+
+/* Contador inicia en 0 */
+renderCart();
+</script>
+
+<!-- =================================================================== -->
+<!-- ★★ AGREGADO SIN MODIFICAR NADA: Fly-to-cart (CSS + JS) ★★ -->
+<!-- =================================================================== -->
+
+<script>
+/* ========= Fly-to-cart: listeners y animación (todo agregado) ========= */
+
+/* Guardamos la última card clickeada (Ver/Agregar) para saber el origen */
+let lastClickedCard = null;
+document.querySelectorAll(".card .add, .card .ver").forEach(btn=>{
+  btn.addEventListener("click", (e)=>{
+    lastClickedCard = e.currentTarget.closest(".card");
+  });
+});
+
+/* Función que hace volar una imagen hacia el icono del carrito */
+function flyToCartFrom(el){
+  try{
+    const img = el.tagName === "IMG" ? el : el.querySelector("img");
+    if(!img) return;
+
+    const cartIcon = document.getElementById("cart-icon");
+    const imgRect  = img.getBoundingClientRect();
+    const cartRect = cartIcon.getBoundingClientRect();
+
+    const clone = img.cloneNode(true);
+    clone.classList.add("flying-img");
+    clone.style.left = imgRect.left + "px";
+    clone.style.top  = imgRect.top  + "px";
+    clone.style.width  = imgRect.width + "px";
+    clone.style.height = imgRect.height + "px";
+    clone.style.transform = "translate(0,0) scale(1)";
+    clone.style.opacity = "1";
+    document.body.appendChild(clone);
+
+    requestAnimationFrame(()=>{
+      const toX = cartRect.left + cartRect.width/2 - (imgRect.left + imgRect.width/2);
+      const toY = cartRect.top  + cartRect.height/2 - (imgRect.top  + imgRect.height/2);
+      clone.style.transform = `translate(${toX}px, ${toY}px) scale(0.1)`;
+      clone.style.opacity = "0.4";
+      clone.style.width  = imgRect.width*0.1 + "px";
+      clone.style.height = imgRect.height*0.1 + "px";
+    });
+
+    clone.addEventListener("transitionend", ()=>{
+      clone.remove();
+      cartIcon.classList.add("bump");
+      setTimeout(()=>cartIcon.classList.remove("bump"), 450);
+    }, { once:true });
+  }catch(_){}
+}
+
+/* Resuelve la imagen origen: la última card clickeada, o busca por prodSel.img */
+function flyToCart(){
+  let sourceImg = null;
+  if(lastClickedCard){
+    sourceImg = lastClickedCard.querySelector("img");
+  }
+  if(!sourceImg && typeof prodSel === "object" && prodSel && prodSel.img){
+    const sel = document.querySelector(`img[src="${prodSel.img}"]`);
+    if(sel) sourceImg = sel;
+  }
+  if(sourceImg) flyToCartFrom(sourceImg);
+}
+
+/* Disparo: cuando se hace click en "Agregar al carrito" del modal */
+document.getElementById("agregarCarrito").addEventListener("click", ()=>{
+  flyToCart();
+});
+</script>
+<!-- =================================================================== -->
+
+</body>
+</html>
+ 

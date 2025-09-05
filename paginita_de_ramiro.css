@@ -1,0 +1,176 @@
+:root{
+  --rosa:#893941;
+  --rosa-claro:#CB7885;
+  --verde:#5E6623;
+  --verde-claro:#F7F9F4;
+  --blanco:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Sirukota', cursive;
+  background:var(--verde-claro);
+  color:var(--rosa);
+  line-height:1.6;
+  scroll-behavior:smooth;
+}
+a{text-decoration:none;color:inherit}
+
+/* Header */
+header{
+  background:linear-gradient(90deg,var(--rosa),var(--rosa-claro));
+  color:#fff;padding:20px 0;position:sticky;top:0;z-index:1000;
+  box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+header h1{font-size:2.8em;text-align:center;margin-bottom:10px}
+nav{text-align:center}
+nav a{margin:0 15px;font-weight:bold;padding:8px 14px;border-radius:10px;transition:.3s}
+nav a:hover{background:rgba(255,255,255,.18)}
+
+/* Secciones base */
+section{
+  padding:90px 20px;max-width:1200px;margin:auto;
+  opacity:0;transform:translateY(50px);transition:.8s ease-out;
+}
+section.visible{opacity:1;transform:translateY(0)}
+section h2{
+  text-align:center;font-size:2.5em;margin-bottom:28px;position:relative;
+}
+section h2::after{
+  content:"";width:88px;height:4px;background:var(--rosa);display:block;margin:12px auto 0;border-radius:5px;
+}
+
+/* Hero */
+#inicio{
+  height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;
+  background:url('https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg') center/cover no-repeat;
+  position:relative;overflow:hidden;border-bottom-left-radius:30px;border-bottom-right-radius:30px;
+}
+#inicio::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35)}
+#inicio > div{position:relative;z-index:1}
+#inicio h2{font-size:3em;text-shadow:2px 2px 8px rgba(0,0,0,.55)}
+#inicio p{font-size:1.3em;margin-top:6px}
+#inicio button{
+  margin-top:20px;padding:12px 22px;border:none;border-radius:12px;background:var(--rosa);color:#fff;font-size:1.05em;cursor:pointer;transition:.3s
+}
+#inicio button:hover{background:var(--verde)}
+
+/* Productos */
+.productos-container{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:26px;
+}
+.card{
+  background:#fff;border-radius:22px;box-shadow:0 10px 24px rgba(0,0,0,.08);overflow:hidden;display:flex;flex-direction:column;transition:.3s;
+}
+.card:hover{transform:translateY(-6px)}
+.card .img-wrap{position:relative}
+.card img{width:100%;height:210px;object-fit:cover;display:block}
+.badge{
+  position:absolute;bottom:10px;left:10px;background:rgba(255,255,255,.9);color:var(--rosa);padding:6px 10px;border-radius:999px;font-weight:bold;font-size:.95em;
+  box-shadow:0 4px 10px rgba(0,0,0,.1)
+}
+.card-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px}
+.card h3{font-size:1.35em;color:var(--rosa);margin:2px 0}
+.card p{font-size:1.02em;color:#6a2d35}
+.price{margin-top:4px;font-weight:800;color:var(--verde);font-size:1.15em}
+.actions{margin-top:10px;display:flex;gap:10px}
+.btn{
+  flex:1;padding:10px 12px;border:none;border-radius:12px;cursor:pointer;font-weight:700;transition:.25s
+}
+.btn-primary{background:var(--rosa);color:#fff}
+.btn-primary:hover{background:var(--verde)}
+.btn-outline{background:#fff;border:2px solid var(--rosa);color:var(--rosa)}
+.btn-outline:hover{background:var(--rosa);color:#fff}
+
+/* Secciones elegantes */
+.wrap{
+  background:linear-gradient(135deg,#ffffff,#fff7f9);padding:70px 28px;border-radius:30px;box-shadow:0 8px 24px rgba(0,0,0,.06)
+}
+#beneficios .wrap{background:linear-gradient(135deg,#ffffff,#ffe9ef)}
+#testimonios .wrap{background:linear-gradient(135deg,#ffffff,#fff4e7)}
+#informacion .wrap{background:linear-gradient(135deg,#ffffff,#eef8e7)}
+
+/* Grids secundarios */
+.beneficios-container,.testimonios-container{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px
+}
+.beneficio-card,.testimonio-card{
+  background:#fff;padding:22px;border-radius:18px;box-shadow:0 6px 16px rgba(0,0,0,.06);text-align:center;transition:.25s
+}
+.beneficio-card:hover,.testimonio-card:hover{transform:translateY(-4px)}
+
+/* Redes */
+.redes a{margin:0 10px;font-size:2em;color:var(--rosa);transition:.2s}
+.redes a:hover{opacity:.85}
+
+/* Footer */
+footer{text-align:center;padding:22px;background:var(--rosa);color:#fff;margin-top:50px}
+
+/* Icono carrito */
+#cart-icon{
+  position:fixed;top:22px;right:20px;background:var(--rosa);color:#fff;padding:10px 16px;border-radius:999px;font-size:1.1em;cursor:pointer;z-index:1100;box-shadow:0 6px 16px rgba(0,0,0,.18)
+}
+#cart-count{
+  background:#fff;color:var(--rosa);font-weight:800;padding:3px 8px;border-radius:50%;margin-left:8px
+}
+
+/* Drawer carrito */
+#cart{
+  position:fixed;right:-420px;top:0;width:380px;height:100%;background:#fff;box-shadow:-6px 0 18px rgba(0,0,0,.25);padding:22px 18px;transition:.4s;z-index:1200;overflow-y:auto
+}
+#cart.active{right:0}
+#close-cart{background:none;border:none;font-size:1.6em;float:right;cursor:pointer}
+#cart h2{margin:6px 0 18px}
+.cart-item{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;padding:10px;border-radius:14px;background:#faf7f8;border:1px solid #f0e3e6}
+.cart-item img{width:58px;height:58px;border-radius:10px;object-fit:cover}
+.cart-info{flex:1}
+.cart-info small{display:block;opacity:.8}
+.cart-actions button{background:none;border:none;font-size:1.15em;cursor:pointer;margin:0 4px;color:var(--rosa)}
+#cart-total{margin:8px 0 12px;font-weight:800;color:var(--verde)}
+#payment-method{margin:8px 0 14px;text-align:left}
+#payment,#sendto{width:100%;padding:10px;border:1px solid #ddd;border-radius:10px}
+
+/* Modal cantidad */
+#modal{
+  position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:2000;padding:16px
+}
+.modal-card{
+  width:100%;max-width:440px;background:#fff;border-radius:22px;padding:22px;box-shadow:0 10px 28px rgba(0,0,0,.3);position:relative
+}
+.modal-close{position:absolute;right:12px;top:10px;font-size:1.4em;cursor:pointer;color:var(--rosa)}
+.modal-title{font-size:1.4em;margin-bottom:6px;color:var(--rosa)}
+.modal-desc{color:#6a2d35;margin-bottom:8px}
+.modal-price{font-weight:800;color:var(--verde);margin-bottom:14px}
+.qty-row{display:flex;align-items:center;gap:10px;justify-content:center;margin:10px 0 16px}
+.qty-btn{width:42px;height:42px;border:none;border-radius:12px;background:var(--rosa);color:#fff;font-size:1.2em;cursor:pointer}
+.qty-input{width:70px;text-align:center;padding:8px;border:1px solid #ddd;border-radius:10px;font-weight:800}
+.modal-actions{display:flex;gap:10px}
+
+/* ❖ AGREGADO: animación/estilo para aviso de retiro */
+@keyframes pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+#pickup-hint{
+  display:none;
+  margin:8px 0 14px;
+  padding:10px;
+  border-radius:12px;
+  background:#eef8e7;
+  color:#2d6a2d;
+  font-weight:bold;
+  animation:pop .35s ease;
+}
+/* ❖ FIN AGREGADO */
+.flying-img{
+  position:fixed;
+  z-index:3000;
+  pointer-events:none;
+  border-radius:12px;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+  transition:transform .9s cubic-bezier(.22,.61,.36,1), opacity .9s ease, width .9s ease, height .9s ease;
+  will-change:transform, opacity, width, height;
+}
+/* pequeño bump del icono al llegar */
+@keyframes cart-bump{
+  0%{transform:scale(1)}
+  40%{transform:scale(1.2)}
+  100%{transform:scale(1)}
+}
+#cart-icon.bump{animation:cart-bump .4s ease}
